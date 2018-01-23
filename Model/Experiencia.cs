@@ -105,7 +105,7 @@ namespace Model
             return rm;
         }
 
-        public AnexGRIDResponde Listar(AnexGRID grid, int tipo)
+        public AnexGRIDResponde Listar(AnexGRID grid, int tipo, int Usuario_id)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace Model
 
                     grid.Inicializar();
                     
-                    var query = ctx.Experiencia.Where(x => x.Tipo == tipo);
+                    var query = ctx.Experiencia.Where(x => x.Tipo == tipo).Where(x => x.Usuario_id == Usuario_id);
 
                     // Ordenamiento
                     if (grid.columna == "id")
