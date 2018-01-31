@@ -55,5 +55,26 @@ namespace Model
 
             return datos;
         }
+
+        public TablaDato Obtener(string relacion, string valor)
+        {
+            var dato = new TablaDato();
+
+            try
+            {
+                using (var ctx = new ProyectoContext())
+                {
+                    dato = ctx.TablaDato.Where(x => x.Relacion == relacion).Where(x => x.Valor == valor)
+                                         .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return dato;
+        }
     }
 }
