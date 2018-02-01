@@ -1,11 +1,9 @@
 ﻿using Model;
 using proyecto.App_Start;
 using proyecto.ViewModels;
+using Rotativa.MVC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Mvc;
 
 namespace proyecto.Controllers
@@ -13,10 +11,7 @@ namespace proyecto.Controllers
     public class DefaultController : Controller
     {
         private Usuario usuario = new Usuario();
-        public ActionResult Index()
-        {
-            return View(usuario.Obtener(FrontOfficeAppStart.UsuarioVisualizando(),true));
-        }
+        public ActionResult Index() => View(usuario.Obtener(FrontOfficeAppStart.UsuarioVisualizando(), true));
 
         public JsonResult EnviarCorreo(ContactoViewModel model)
         {
@@ -57,5 +52,9 @@ namespace proyecto.Controllers
             }
             return Json(rm);
         }
+
+        public ActionResult ExportaAPDF() => new ActionAsPdf("PDF");
+
+        public ActionResult PDF() => View(usuario.Obtener(FrontOfficeAppStart.UsuarioVisualizando(), true));
     }
 }
