@@ -14,10 +14,7 @@ namespace proyecto.Areas.Admin.Controllers
         private Usuario usuario = new Usuario();
 
         [NoLogin]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         public JsonResult Acceder(string Email, string Password) 
         {
