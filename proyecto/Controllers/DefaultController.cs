@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Helper;
+using Model;
 using proyecto.App_Start;
 using proyecto.ViewModels;
 using Rotativa.MVC;
@@ -22,7 +23,6 @@ namespace proyecto.Controllers
                 try
                 {
                     var _usuario = usuario.Obtener(FrontOfficeAppStart.UsuarioVisualizando());
-
                     var mail = new MailMessage();
                     mail.From = new MailAddress(model.Correo, model.Nombre);
                     mail.To.Add(_usuario.Email);
@@ -31,12 +31,12 @@ namespace proyecto.Controllers
                     mail.Body = model.Mensaje;
 
                     var SmtpServer = new SmtpClient("smtp.gmail.com"); // or "smtp.gmail.com"
-                    SmtpServer.Port = 587;
+                    SmtpServer.Port = 465;
                     SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
                     SmtpServer.UseDefaultCredentials = false;
 
                     // Agrega tu correo y tu contraseña, hemos usado el servidor de Outlook.
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("dcaballero@iconoi.com", "Iconoi.2012");
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("daricaba@gmail.com", "polacan_88");
                     SmtpServer.EnableSsl = true;
                     SmtpServer.Send(mail);
                 }
@@ -56,5 +56,15 @@ namespace proyecto.Controllers
         public ActionResult ExportaAPDF() => new ActionAsPdf("PDF");
 
         public ActionResult PDF() => View(usuario.Obtener(FrontOfficeAppStart.UsuarioVisualizando(), true));
+        public JsonResult GuardarTestimonio(Testimonio model)
+        {
+            var rm = new ResponseModel();
+            if (ModelState.IsValid)
+            {
+                rm = model.Guardar();
+                if (rm.response) rm.message = "Gracias por comentar";
+            }
+            return Json(rm);
+        }
     }
 }
