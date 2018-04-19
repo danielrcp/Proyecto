@@ -52,6 +52,7 @@
     <Compile Include="AnexGRID.cs" />
     <Compile Include="Experiencia.cs" />
     <Compile Include="Habilidad.cs" />
+    <Compile Include="HabilidadMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProyectoContext.cs" />
     <Compile Include="ResponseModel.cs" />
